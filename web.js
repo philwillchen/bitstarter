@@ -1,17 +1,24 @@
 var express = require('express');
 
 var app = express.createServer(express.logger());
+var content;
 
-app.get('/', function(request, response) {
-  fs = require('fs')
-  fs.readFile('/index.html', 'utf8', function (err,data) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log(data);
-  });
-)
+fs.readFile('./index.html', function read(err, data) {
+  if (err) {
+    throw err;
+  }
+  content = data;
+
+  processFile();
 });
+
+function processFile() {
+  console.log(content);
+}
+
+#app.get('/', function(request, response) {
+#  response.send('Hello World!');
+#});
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
